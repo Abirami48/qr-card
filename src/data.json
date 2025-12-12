@@ -1,14 +1,13 @@
 {
-  "name": "Jane Doe",
-  "designation": "Creative Director",
-  "mobile": "+1 (555) 123-4567",
-  "email": "contact@janedoe.com",
-  "address": "123 Business Park, Silicon Valley, CA 94025",
-  "services": [
-    "Web Development",
-    "UI/UX Design",
-    "Digital Marketing",
-    "Brand Consultation"
+  "name": "Sitalya Stores",
+  "logo": "/logo.jpeg",
+  "tagline": "Feel the Fashion",
+  "mobile": "+91 73388 84462",
+  "email": "sitalyastores@gmail.com",
+  "address": "Kudavasal, India",
+  "products": [
+    "Sarees",
+    "Jewelry"
   ],
   "socials": {
     "instagram": "https://instagram.com",

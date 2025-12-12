@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import data from './data.json';
-// Added Share2 and Copy icons
-import { Phone, MapPin, Instagram, Facebook, Youtube, CheckCircle, Mail, UserPlus, QrCode, X, Share2, Copy } from 'lucide-react';
+import { Phone, MapPin, Instagram, Facebook, Youtube, CheckCircle, Mail, UserPlus, QrCode, X, Share2 } from 'lucide-react';
 import { FaWhatsapp } from "react-icons/fa";
 import QRCode from "react-qr-code";
 
 function App() {
   const [showQR, setShowQR] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false); // To show "Copied!" feedback
+  const [copySuccess, setCopySuccess] = useState(false);
 
-  // Logic to Share the Link or Copy it
+  // Logic to Share the Link
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -22,20 +21,19 @@ function App() {
         console.log('Error sharing:', error);
       }
     } else {
-      // Fallback for desktops/browsers without share support
       navigator.clipboard.writeText(window.location.href);
       setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000); // Reset after 2 seconds
+      setTimeout(() => setCopySuccess(false), 2000);
     }
   };
 
-  // Logic to generate and download the vCard
+  // Logic to generate vCard
   const handleSaveContact = () => {
     const vCardData = `BEGIN:VCARD
 VERSION:3.0
 FN:${data.name}
 N:;${data.name};;;
-TITLE:${data.designation || 'Service Provider'}
+TITLE:${data.tagline || 'Feel the Fashion'}
 TEL;TYPE=CELL:${data.mobile}
 EMAIL;TYPE=WORK:${data.email}
 ADR;TYPE=WORK:;;${data.address};;;;
@@ -55,12 +53,10 @@ END:VCARD`;
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       
-      {/* QR Code Modal Overlay */}
+      {/* QR Code Modal */}
       {showQR && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 transition-all">
-          <div className="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full text-center relative animate-fade-in-up">
-            
-            {/* Close Button */}
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full text-center relative">
             <button 
               onClick={() => setShowQR(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors bg-gray-100 rounded-full p-1"
@@ -72,24 +68,16 @@ END:VCARD`;
             <p className="text-slate-500 mb-6 text-sm">Share this card instantly</p>
             
             <div className="bg-white p-3 rounded-xl border-2 border-slate-100 inline-block shadow-sm">
-                <QRCode 
-                  value={window.location.href} 
-                  size={180}
-                  level={"H"}
-                />
+                <QRCode value={window.location.href} size={180} level={"H"} />
             </div>
             
-            {/* NEW SHARE BUTTON INSIDE MODAL */}
             <div className="mt-8 flex justify-center">
                 <button 
                     onClick={handleShare}
                     className="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/30 active:scale-95 w-full justify-center"
                 >
-                    {/* Switch icon based on whether we are showing 'Copied' state */}
                     {copySuccess ? <CheckCircle size={18} /> : <Share2 size={18} />}
-                    <span className="font-semibold">
-                        {copySuccess ? "Link Copied!" : "Share Link"}
-                    </span>
+                    <span className="font-semibold">{copySuccess ? "Link Copied!" : "Share Link"}</span>
                 </button>
             </div>
           </div>
@@ -99,26 +87,43 @@ END:VCARD`;
       {/* Main Card Container */}
       <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden transform transition-all hover:shadow-3xl">
         
-        {/* Header Section */}
-        <div className="bg-slate-900 text-white p-8 text-center relative">
+        {/* HEADER SECTION - UPDATED FOR SIDE-BY-SIDE LAYOUT */}
+        <div className="bg-slate-900 text-white p-8 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full bg-blue-600 opacity-10"></div>
             
-            {/* QR Toggle Button */}
+            {/* QR Button */}
             <button 
                 onClick={() => setShowQR(true)}
-                className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors backdrop-blur-md group"
-                title="Show QR Code"
+                className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors backdrop-blur-md group z-20"
             >
                 <QrCode size={20} className="text-white group-hover:scale-110 transition-transform" />
             </button>
 
-            <h1 className="text-3xl font-bold tracking-tight relative z-10">{data.name}</h1>
-            <p className="text-blue-200 mt-1 relative z-10">{data.designation || 'Service Provider'}</p>
+            {/* FLEX CONTAINER FOR LOGO AND TEXT */}
+            <div className="relative z-10 flex items-center space-x-6">
+              
+              {/* Logo */}
+              <div className="flex-shrink-0">
+                <div className="w-24 h-24 rounded-full border-4 border-white/20 shadow-xl overflow-hidden bg-white">
+                   <img 
+                     src={data.logo || "https://placehold.co/150"} 
+                     alt="Profile" 
+                     className="w-full h-full object-cover"
+                   />
+                </div>
+              </div>
+
+              {/* Text Info */}
+              <div className="text-left">
+                <h1 className="text-3xl font-bold tracking-tight leading-tight">{data.name}</h1>
+                <p className="text-blue-200 mt-1 font-medium">{data.tagline || 'Feel the Fashion'}</p>
+              </div>
+
+            </div>
         </div>
 
         {/* Content Body */}
         <div className="p-8">
-          
           <div className="space-y-4 mb-8">
             <ContactRow icon={<Phone size={20} />} text={data.mobile} href={`tel:${data.mobile}`} />
             <ContactRow icon={<Mail size={20} />} text={data.email} href={`mailto:${data.email}`} />
@@ -128,9 +133,9 @@ END:VCARD`;
           <hr className="border-gray-100 my-6" />
 
           <div className="mb-8">
-            <h2 className="text-lg font-semibold text-slate-800 mb-4 uppercase tracking-wider text-sm">Services Offered</h2>
+            <h2 className="text-lg font-semibold text-slate-800 mb-4 uppercase tracking-wider text-sm">Products Included</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {data.services.map((service, index) => (
+              {data.products.map((service, index) => (
                 <div key={index} className="flex items-center space-x-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
                   <CheckCircle size={16} className="text-green-500" />
                   <span className="text-slate-700 text-sm font-medium">{service}</span>
@@ -139,7 +144,6 @@ END:VCARD`;
             </div>
           </div>
 
-          {/* Social Media Footer */}
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-gray-100">
             <SocialIcon Link={data.socials.instagram} Icon={Instagram} color="text-pink-600" />
             <SocialIcon Link={data.socials.facebook} Icon={Facebook} color="text-blue-600" />
@@ -161,25 +165,16 @@ END:VCARD`;
   );
 }
 
-// Helper Components
+// Helpers
 const ContactRow = ({ icon, text, href }) => (
   <div className="flex items-start space-x-3 text-slate-600 hover:text-slate-900 transition-colors">
     <div className="mt-1 text-blue-600">{icon}</div>
-    {href ? (
-      <a href={href} className="hover:underline font-medium">{text}</a>
-    ) : (
-      <span className="font-medium">{text}</span>
-    )}
+    {href ? <a href={href} className="hover:underline font-medium">{text}</a> : <span className="font-medium">{text}</span>}
   </div>
 );
 
 const SocialIcon = ({ Link, Icon, color }) => (
-  <a 
-    href={Link} 
-    target="_blank" 
-    rel="noopener noreferrer" 
-    className={`${color} hover:opacity-80 transform hover:scale-110 transition-transform p-2 bg-gray-50 rounded-full`}
-  >
+  <a href={Link} target="_blank" rel="noopener noreferrer" className={`${color} hover:opacity-80 transform hover:scale-110 transition-transform p-2 bg-gray-50 rounded-full`}>
     <Icon size={28} />
   </a>
 );
