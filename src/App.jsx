@@ -18,7 +18,7 @@ import QRCode from "react-qr-code";
 
 function App() {
   const [showQR, setShowQR] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);  
 
   // Logic to Share the Link
   const handleShare = async () => {
@@ -27,7 +27,7 @@ function App() {
         await navigator.share({
           title: `${data.name} - Digital Card`,
           text: `Check out ${data.name}'s digital business card.`,
-          url: window.location.href,
+          url: window.location.href,  
         });
       } catch (error) {
         console.log("Error sharing:", error);
@@ -71,10 +71,10 @@ END:VCARD`;
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gray-50">
       {/* QR Code Modal */}
       {showQR && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
           <div className="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full text-center relative">
             <button
               onClick={() => setShowQR(false)}
@@ -97,7 +97,8 @@ END:VCARD`;
             <div className="mt-8 flex justify-center">
               <button
                 onClick={handleShare}
-                className="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/30 active:scale-95 w-full justify-center"
+                className="flex items-center space-x-2 text-white px-6 py-3 rounded-full transition-all shadow-lg active:scale-95 w-full justify-center hover:opacity-90"
+                style={{ backgroundColor: '#4b1216' }} // Custom Color
               >
                 {copySuccess ? <CheckCircle size={18} /> : <Share2 size={18} />}
                 <span className="font-semibold">
@@ -112,8 +113,8 @@ END:VCARD`;
       {/* Main Card Container */}
       <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden transform transition-all hover:shadow-3xl">
         {/* HEADER SECTION - UPDATED FOR SIDE-BY-SIDE LAYOUT */}
-        <div className="bg-slate-900 text-white p-8 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full bg-blue-600 opacity-10"></div>
+        <div className="text-white p-8 relative overflow-hidden" style={{ backgroundColor: '#4b1216' }}>
+          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-10"></div>
 
           {/* QR Button */}
           <button
@@ -134,17 +135,17 @@ END:VCARD`;
                 <img
                   src={data.logo || "https://placehold.co/150"}
                   alt="Profile"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
             </div>
 
             {/* Text Info */}
             <div className="text-left">
-              <h1 className="text-3xl font-bold tracking-tight leading-tight">
+              <h1 className="text-3xl font-bold tracking-tight leading-tight text-white">
                 {data.name}
               </h1>
-              <p className="text-blue-200 mt-1 font-medium">
+              <p className="text-white/80 mt-1 font-medium">
                 {data.tagline || "Feel the Fashion"}
               </p>
             </div>
@@ -189,7 +190,7 @@ END:VCARD`;
                   key={index}
                   className="flex items-center space-x-2 bg-slate-50 p-3 rounded-lg border border-slate-100"
                 >
-                  <CheckCircle size={16} className="text-green-500" />
+                  <CheckCircle size={16} className="text-[#4b1216]" />
                   <span className="text-slate-700 text-sm font-medium">
                     {service}
                   </span>
@@ -198,6 +199,10 @@ END:VCARD`;
             </div>
           </div>
 
+          <div className="mb-8">
+            <h2 className="text-lg font-semibold text-slate-800 mb-4 uppercase tracking-wider text-sm">
+              Follow Us With
+            </h2>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-gray-100">
             <SocialIcon
               Link={data.socials.instagram}
@@ -222,11 +227,13 @@ END:VCARD`;
 
             <button
               onClick={handleSaveContact}
-              className="flex items-center space-x-2 bg-slate-900 text-white px-5 py-2.5 rounded-full hover:bg-slate-800 transition-colors shadow-lg shadow-slate-200 ml-2 active:scale-95 transform duration-150"
-            >
+              className="flex items-center space-x-2 text-white px-5 py-2.5 rounded-full shadow-lg shadow-slate-200 ml-2 active:scale-95 transform duration-150 hover:opacity-90"
+              style={{ backgroundColor: '#4b1216' }}
+              >
               <UserPlus size={18} />
               <span className="text-sm font-semibold">Save Contact</span>
             </button>
+          </div>
           </div>
         </div>
       </div>
@@ -237,7 +244,7 @@ END:VCARD`;
 // Helpers
 const ContactRow = ({ icon, text, href }) => (
   <div className="flex items-start space-x-3 text-slate-600 hover:text-slate-900 transition-colors">
-    <div className="mt-1 text-blue-600">{icon}</div>
+    <div className="mt-1" style={{ color: '#4b1216' }}>{icon}</div>
     {href ? (
       <a href={href} className="hover:underline font-medium">
         {text}
