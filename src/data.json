@@ -1,13 +1,15 @@
 {
   "name": "Sitalya Stores",
   "logo": "/logo.jpeg",
-  "tagline": "Feel the Fashion",
-  "mobile": "+91 73388 84462",
+  "tagline": "Women's Fashion Store",
+  "mobile": "+91 73388 84462, +91 73388 84471",
   "email": "sitalyastores@gmail.com",
   "address": "Kudavasal, India",
   "products": [
     "Sarees",
-    "Jewelry"
+    "Jewelry",
+    "Handbags",
+    "Cosmetics & accessories"
   ],
   "socials": {
     "instagram": "https://instagram.com",

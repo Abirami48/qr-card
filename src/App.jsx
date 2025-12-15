@@ -68,7 +68,7 @@ END:VCARD`;
             <p className="text-slate-500 mb-6 text-sm">Share this card instantly</p>
             
             <div className="bg-white p-3 rounded-xl border-2 border-slate-100 inline-block shadow-sm">
-                <QRCode value={window.location.href} size={180} level={"H"} />
+                <QRCode value={window.location.href} size={180} level={"L"} />
             </div>
             
             <div className="mt-8 flex justify-center">
