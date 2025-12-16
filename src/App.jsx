@@ -41,24 +41,6 @@ function App() {
 
   // Logic to generate vCard
   const handleSaveContact = () => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    const isAndroid = /android/i.test(userAgent);
-    // 1. ANDROID: Open the "New Contact" Form Directly
-    if (isAndroid) {
-      // Construct an Android Intent URI
-      // This tells the Android OS: "Open the 'Insert Contact' screen with these details pre-filled"
-      const intentUrl = `intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;S.name=${encodeURIComponent(
-        data.name
-      )};S.phone=${encodeURIComponent(
-        data.mobile
-      )};S.email=${encodeURIComponent(
-        data.email
-      )};S.postal=${encodeURIComponent(data.address)};end`;
-
-      // Attempt to open it
-      window.location.href = intentUrl;
-      return;
-    }
     // We conditionally add the second number if it exists
     const secondaryPhone = data.mobile2 ? `TEL;TYPE=CELL:${data.mobile2}` : "";
 
