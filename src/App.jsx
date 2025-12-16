@@ -18,7 +18,7 @@ import QRCode from "react-qr-code";
 
 function App() {
   const [showQR, setShowQR] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);  
+  const [copySuccess, setCopySuccess] = useState(false);
 
   // Logic to Share the Link
   const handleShare = async () => {
@@ -27,7 +27,7 @@ function App() {
         await navigator.share({
           title: `${data.name} - Digital Card`,
           text: `Check out ${data.name}'s digital business card.`,
-          url: window.location.href,  
+          url: window.location.href,
         });
       } catch (error) {
         console.log("Error sharing:", error);
@@ -41,6 +41,24 @@ function App() {
 
   // Logic to generate vCard
   const handleSaveContact = () => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const isAndroid = /android/i.test(userAgent);
+    // 1. ANDROID: Open the "New Contact" Form Directly
+    if (isAndroid) {
+      // Construct an Android Intent URI
+      // This tells the Android OS: "Open the 'Insert Contact' screen with these details pre-filled"
+      const intentUrl = `intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;S.name=${encodeURIComponent(
+        data.name
+      )};S.phone=${encodeURIComponent(
+        data.mobile
+      )};S.email=${encodeURIComponent(
+        data.email
+      )};S.postal=${encodeURIComponent(data.address)};end`;
+
+      // Attempt to open it
+      window.location.href = intentUrl;
+      return;
+    }
     // We conditionally add the second number if it exists
     const secondaryPhone = data.mobile2 ? `TEL;TYPE=CELL:${data.mobile2}` : "";
 
@@ -48,7 +66,7 @@ function App() {
 VERSION:3.0
 FN:${data.name}
 N:;${data.name};;;
-TITLE:${data.designation || "Service Provider"}
+TITLE:${data.tagline || "Women's Fashion Store"}
 TEL;TYPE=CELL:${data.mobile}
 ${secondaryPhone}
 EMAIL;TYPE=WORK:${data.email}
@@ -98,7 +116,7 @@ END:VCARD`;
               <button
                 onClick={handleShare}
                 className="flex items-center space-x-2 text-white px-6 py-3 rounded-full transition-all shadow-lg active:scale-95 w-full justify-center hover:opacity-90"
-                style={{ backgroundColor: '#4b1216' }} // Custom Color
+                style={{ backgroundColor: "#4b1216" }} // Custom Color
               >
                 {copySuccess ? <CheckCircle size={18} /> : <Share2 size={18} />}
                 <span className="font-semibold">
@@ -113,7 +131,10 @@ END:VCARD`;
       {/* Main Card Container */}
       <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden transform transition-all hover:shadow-3xl">
         {/* HEADER SECTION - UPDATED FOR SIDE-BY-SIDE LAYOUT */}
-        <div className="text-white p-8 relative overflow-hidden" style={{ backgroundColor: '#4b1216' }}>
+        <div
+          className="text-white p-8 relative overflow-hidden"
+          style={{ backgroundColor: "#4b1216" }}
+        >
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-10"></div>
 
           {/* QR Button */}
@@ -146,7 +167,7 @@ END:VCARD`;
                 {data.name}
               </h1>
               <p className="text-white/80 mt-1 font-medium">
-                {data.tagline || "Feel the Fashion"}
+                {data.tagline || "Women's Fashion Store"}
               </p>
             </div>
           </div>
@@ -203,37 +224,37 @@ END:VCARD`;
             <h2 className="text-lg font-semibold text-slate-800 mb-4 uppercase tracking-wider text-sm">
               Follow Us With
             </h2>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-gray-100">
-            <SocialIcon
-              Link={data.socials.instagram}
-              Icon={Instagram}
-              color="text-pink-600"
-            />
-            <SocialIcon
-              Link={data.socials.facebook}
-              Icon={Facebook}
-              color="text-blue-600"
-            />
-            <SocialIcon
-              Link={data.socials.youtube}
-              Icon={Youtube}
-              color="text-red-600"
-            />
-            <SocialIcon
-              Link={data.socials.whatsapp}
-              Icon={FaWhatsapp}
-              color="text-green-500"
-            />
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-gray-100">
+              <SocialIcon
+                Link={data.socials.instagram}
+                Icon={Instagram}
+                color="text-pink-600"
+              />
+              <SocialIcon
+                Link={data.socials.facebook}
+                Icon={Facebook}
+                color="text-blue-600"
+              />
+              <SocialIcon
+                Link={data.socials.youtube}
+                Icon={Youtube}
+                color="text-red-600"
+              />
+              <SocialIcon
+                Link={data.socials.whatsapp}
+                Icon={FaWhatsapp}
+                color="text-green-500"
+              />
 
-            <button
-              onClick={handleSaveContact}
-              className="flex items-center space-x-2 text-white px-5 py-2.5 rounded-full shadow-lg shadow-slate-200 ml-2 active:scale-95 transform duration-150 hover:opacity-90"
-              style={{ backgroundColor: '#4b1216' }}
+              <button
+                onClick={handleSaveContact}
+                className="flex items-center space-x-2 text-white px-5 py-2.5 rounded-full shadow-lg shadow-slate-200 ml-2 active:scale-95 transform duration-150 hover:opacity-90"
+                style={{ backgroundColor: "#4b1216" }}
               >
-              <UserPlus size={18} />
-              <span className="text-sm font-semibold">Save Contact</span>
-            </button>
-          </div>
+                <UserPlus size={18} />
+                <span className="text-sm font-semibold">Save Contact</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -244,7 +265,9 @@ END:VCARD`;
 // Helpers
 const ContactRow = ({ icon, text, href }) => (
   <div className="flex items-start space-x-3 text-slate-600 hover:text-slate-900 transition-colors">
-    <div className="mt-1" style={{ color: '#4b1216' }}>{icon}</div>
+    <div className="mt-1" style={{ color: "#4b1216" }}>
+      {icon}
+    </div>
     {href ? (
       <a href={href} className="hover:underline font-medium">
         {text}
