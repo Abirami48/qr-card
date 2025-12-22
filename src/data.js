@@ -43,5 +43,26 @@ export const clients = [
       youtube: "https://youtube.com",
       whatsapp: "https://wa.me/19998887777"
     }
+  },
+  {
+    id: "sanjus-kitchen",
+    name: "Sanju's Kitchen",
+    designation: "Satisfy Your Taste Buds",
+    mobile: "+91 6363 432 739",
+    email: "fmsanjuskitchen@gmail.com",
+    address: "T.Nagar, Chennai",
+    logo: "https://placehold.co/150/1e3a8a/white?text=SK",
+    theme: {
+      primary: "#1e3a8a", // Navy Blue Color
+      secondary: "#172554",
+      text: "white"
+    },
+    products: ["Multi-Purpose Masala", "Gun Powders", "Instant Rice Mix", "Seasonings", "Sun Dried Raw Powders"],
+    socials: {
+      instagram: "https://www.instagram.com/sanjus_kitchen_hmp?utm_source=qr&igsh=MWdmNGc0bmtqaTI2bA==",
+      facebook: "https://www.facebook.com/share/1BihbkqgDA/",
+      youtube: "https://youtube.com/@balamuruganrajendran619?si=DKi6I63sLjpQ2xxJ",
+      whatsapp: "https://wa.me/c/916363432739"
+    }
   }
 ];
