@@ -1,0 +1,47 @@
+// src/data.js
+
+export const clients = [
+  {
+    id: "jane-fashion", // This will be the URL (e.g., /card/jane-fashion)
+    name: "Jane Doe",
+    designation: "Women's Fashion Store",
+    mobile: "+1 555 000 1111",
+    mobile2: "+1 555 000 2222",
+    email: "jane@fashion.com",
+    address: "123 Fashion Ave, NY",
+    logo: "https://placehold.co/150/4b1216/white?text=JD", // Placeholder logo
+    theme: {
+      primary: "#4b1216", // Your Burgundy Color
+      secondary: "#800000",
+      text: "white"
+    },
+    products: ["Dresses", "Handbags", "Accessories", "Footwear"],
+    socials: {
+      instagram: "https://instagram.com",
+      facebook: "https://facebook.com",
+      youtube: "https://youtube.com",
+      whatsapp: "https://wa.me/15550001111"
+    }
+  },
+  {
+    id: "john-tech",
+    name: "John Smith",
+    designation: "Tech Solutions Inc.",
+    mobile: "+1 999 888 7777",
+    email: "john@tech.com",
+    address: "404 Silicon Valley, CA",
+    logo: "https://placehold.co/150/1e3a8a/white?text=JS",
+    theme: {
+      primary: "#1e3a8a", // Navy Blue Color
+      secondary: "#172554",
+      text: "white"
+    },
+    products: ["Web Dev", "Cloud Services", "Cyber Security", "Consulting"],
+    socials: {
+      instagram: "https://instagram.com",
+      facebook: "https://facebook.com",
+      youtube: "https://youtube.com",
+      whatsapp: "https://wa.me/19998887777"
+    }
+  }
+];
