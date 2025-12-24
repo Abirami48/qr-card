@@ -62,9 +62,9 @@ END:VCARD`;
     <div className="min-h-screen flex items-center justify-center p-4 bg-gray-50 relative">
       
       {/* Home Button to go back to Dashboard */}
-      <Link to="/" className="absolute top-4 left-4 p-2 bg-white rounded-full shadow-md z-10 hover:bg-gray-100">
+      {/* <Link to="/" className="absolute top-4 left-4 p-2 bg-white rounded-full shadow-md z-10 hover:bg-gray-100">
         <Home size={20} className="text-gray-600" />
-      </Link>
+      </Link> */}
 
       {/* QR Code Modal */}
       {showQR && (
@@ -100,7 +100,7 @@ END:VCARD`;
           
           <div className="relative z-10 flex items-center space-x-6">
             <div className="flex-shrink-0 w-24 h-24 rounded-full border-4 border-white/20 shadow-xl overflow-hidden bg-white">
-              <img src={data.logo} alt="Profile" className="w-full h-full object-cover" />
+              <img src={data.logo} alt="Profile" className="w-full h-full object-contain p-1" />
             </div>
             <div className="text-left">
               <h1 className="text-3xl font-bold leading-tight">{data.name}</h1>

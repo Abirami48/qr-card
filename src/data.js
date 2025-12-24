@@ -51,10 +51,10 @@ export const clients = [
     mobile: "+91 6363 432 739",
     email: "fmsanjuskitchen@gmail.com",
     address: "T.Nagar, Chennai",
-    logo: "https://placehold.co/150/1e3a8a/white?text=SK",
+    logo: "/Sanjus_logo.png",
     theme: {
-      primary: "#1e3a8a", // Navy Blue Color
-      secondary: "#172554",
+      primary: "#B63A2E", // Navy Blue Color
+      secondary: "#E24A3B",
       text: "white"
     },
     products: ["Multi-Purpose Masala", "Gun Powders", "Instant Rice Mix", "Seasonings", "Sun Dried Raw Powders"],
